@@ -38,7 +38,7 @@ const MAX_LINK = '';
       b.innerHTML = `<img src="img/${name}${big ? '' : '_s'}.jpg" alt="" loading="lazy">`;
       if (i === visible - 1 && list.length > visible) {
         b.classList.add('g-more');
-        b.dataset.more = `ещё ${list.length - visible} фото`;
+        b.dataset.more = `ещё ${list.length - visible}\u00a0фото`;
       }
       b.addEventListener('click', () => { set = list; show(i); lb.showModal(); });
       box.appendChild(b);
