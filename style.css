@@ -55,7 +55,7 @@ p { margin: 0 0 1em; }
 .nav { display: flex; gap: 24px; margin-left: auto; }
 .nav a, .top-phone { color: var(--ink); text-decoration: none; }
 .nav a:hover { color: var(--brick); }
-.top-phone { font-weight: 600; }
+.top-phone { font-weight: 600; white-space: nowrap; }
 
 /* Первый экран: текст слева, фото справа с подписью */
 .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: end; padding: clamp(40px, 7vw, 88px) 0 32px; }
@@ -70,7 +70,10 @@ figcaption { font-size: 14px; color: var(--soft); margin-top: 10px; }
 .search { padding-bottom: clamp(48px, 7vw, 80px); }
 .widget-box { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px; min-height: 72px; }
 #book .widget-box { margin-top: 28px; padding: 16px; min-height: 240px; }
-#hr-widget, #hr-modal { --custom-main: #a3492a !important; --custom-main-dark: #86391f !important; --custom-main-light: #f3e3dc !important; }
+/* Строка поиска виджета идёт с z-index 9000 и при прокрутке наезжает на шапку; календарь и окна виджета свои слои сохраняют */
+#hr-widget[data-instance-id] .hr-search-container { z-index: auto !important; }
+/* Цвета виджета: он пишет их inline в <html>, !important из таблицы стилей их перебивает (в т.ч. в календаре вне блока) */
+:root { --custom-main: #a3492a !important; --custom-main-dark: #86391f !important; --custom-main-light: #f3e3dc !important; }
 
 /* Письмо хозяйки */
 .letter { display: grid; grid-template-columns: 300px 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; padding: clamp(40px, 6vw, 72px) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -110,11 +113,6 @@ figcaption { font-size: 14px; color: var(--soft); margin-top: 10px; }
 .garden { background: var(--paper-2); padding: clamp(64px, 9vw, 112px) 0; }
 .mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 190px; gap: 6px; margin-top: 32px; }
 .mosaic .g-item:nth-child(1), .mosaic .g-item:nth-child(6) { grid-column: span 2; grid-row: span 2; }
-
-/* Кот */
-.cat { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 4vw, 48px); align-items: center; padding: clamp(56px, 8vw, 96px) 0; max-width: 880px; }
-.cat img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; transform: rotate(1deg); }
-.cat p { font: italic 400 clamp(20px, 2.2vw, 26px)/1.5 Literata, serif; margin: 0; }
 
 /* Бронирование */
 .book { padding: clamp(56px, 8vw, 96px) 0; border-top: 1px solid var(--line); }
@@ -185,10 +183,9 @@ figcaption { font-size: 14px; color: var(--soft); margin-top: 10px; }
 }
 @media (max-width: 600px) {
   body { font-size: 17px; }
-  .logo { font-size: 16px; }
+  .logo-addr { display: none; }
   .season-row { grid-template-columns: 1fr; }
   .season-row img { aspect-ratio: 4 / 3; }
-  .cat { grid-template-columns: 1fr; }
   .fb-cards { grid-template-columns: 1fr; }
   .spec div { grid-template-columns: 1fr; gap: 2px; }
   .lb-prev, .lb-next { top: auto; bottom: 16px; transform: none; }
