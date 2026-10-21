@@ -227,6 +227,19 @@
   <button class="lb-nav lb-next" aria-label="Следующее">›</button>
 </dialog>
 
+<template id="fb-search">
+  <div class="widget-box fb fb-row">
+    <p>Онлайн-поиск дат не загрузился. Узнайте свободные даты у хозяйки — ответим быстро.</p>
+    <div class="fb-btns"><a class="btn" href="https://wa.me/79280295510" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn-line" href="tel:+79280295510">Позвонить</a></div>
+  </div>
+</template>
+<template id="fb-list">
+  <div class="fb-cards">
+    <div class="fb-card"><b>Golden Sun</b><span>до 6 гостей · 60 м²</span><strong>от 7 000 ₽<small> / сутки</small></strong><a class="btn" href="https://wa.me/79280295510?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20Golden%20Sun" target="_blank" rel="noopener">Забронировать в WhatsApp</a></div>
+    <div class="fb-card"><b>Шале Чинара</b><span>до 4 гостей · 40 м²</span><strong>от 6 000 ₽<small> / сутки</small></strong><a class="btn" href="https://wa.me/79280295510?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%A8%D0%B0%D0%BB%D0%B5%20%D0%A7%D0%B8%D0%BD%D0%B0%D1%80%D0%B0" target="_blank" rel="noopener">Забронировать в WhatsApp</a></div>
+  </div>
+</template>
+
 <script src="photos.js"></script>
 <script src="app.js"></script>
 <script type="module" src="https://homereserve.ru/widget.js"></script>
@@ -238,6 +251,16 @@
     window.homereserve.initWidgetSearch({ token: 'M5FWTZ0nXO', instance_id: 'search' });
     window.homereserve.initWidgetList({ token: 'M5FWTZ0nXO', instance_id: 'list' });
   }, 50);
+</script>
+<script>
+  // Если виджет не загрузился (блокировщик рекламы, сбой сети) — показываем запасной блок
+  setTimeout(() => {
+    document.querySelectorAll('[data-instance-id]').forEach(el => {
+      if (el.offsetHeight > 20) return;
+      const fb = document.getElementById('fb-' + el.dataset.instanceId);
+      if (fb) { el.parentElement.replaceWith(fb.content.cloneNode(true)); }
+    });
+  }, 9000);
 </script>
 </body>
 </html>
