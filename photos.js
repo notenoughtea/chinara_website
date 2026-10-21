@@ -13,7 +13,6 @@ window.PHOTOS = {
   "gs-04",
   "gs-18",
   "gs-25",
-  "gs-12",
   "gs-08"
  ],
  "ch": [
@@ -29,8 +28,7 @@ window.PHOTOS = {
   "ch-20",
   "ch-27",
   "ch-37",
-  "ch-09",
-  "ch-43"
+  "ch-09"
  ],
  "area": [
   "ch-07",
@@ -41,7 +39,7 @@ window.PHOTOS = {
   "gs-38",
   "gs-28",
   "gs-56",
-  "gs-30",
-  "gs-19"
+  "ch-18",
+  "ch-11"
  ]
 };
